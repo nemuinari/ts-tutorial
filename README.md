@@ -27,7 +27,7 @@ $ node dist/index.js // 実行
 
 ```t
 // .gitignore
-./node_modules/
-./dist/
+node_modules/
+dist/
 
 ```
