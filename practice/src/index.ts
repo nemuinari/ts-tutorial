@@ -1,3 +1,6 @@
 // hello world
-const message: string = "Hello, World!";
+const greeting = "Hello, ";
+const target = "World!";
+const message = greeting + target;
+
 console.log(message);
