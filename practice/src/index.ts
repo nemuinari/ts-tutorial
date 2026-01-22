@@ -1,13 +1,13 @@
 import { createInterface } from "readline";
 
-// primitive types
+// chapter 2
 const rl = createInterface({
   input: process.stdin,
   output: process.stdout,
 });
 
-rl.question("Enter a number: ", (line: string) => {
-  const num = Number(line);
-  console.log(num + 1000);
+rl.question("What is your name?: ", (name: string) => {
+  const displayName = name || "Guest";
+  console.log(`Hello, ${displayName}!`);
   rl.close();
 });
