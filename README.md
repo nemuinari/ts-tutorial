@@ -15,13 +15,23 @@ $ node dist/index.js // 実行
 
 ```
 
-```t
-// tsconfig.json
-// "outDir": "./dist", -> "outDir": "./dist",
-// コメントアウトを解除
+```lua
+-- tsconfig.json
+--  コメントアウトを解除
+-- "outDir": "./dist",
+-- "rootDir": "./src",
 
-// "compilerOptions": {},の外に下記を追加
-// "include": ["./src/**/*.ts"]
+-- "compilerOptions" スコープの外に下記を追加
+-- "include": ["./src/**/*.ts"]
+
+-- [] から ["node"] に変更
+-- "types": ["node"],
+
+```
+
+```lua
+-- package.json
+-- "type": "commonjs" => "module"
 
 ```
 
