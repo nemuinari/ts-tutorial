@@ -1,13 +1,21 @@
-import { createInterface } from "readline";
+// chapter 2 - FizzBuzz
+const fizzBuzz = () => {
+  let result: string = "";
+  for (let i = 1; i <= 100; i++) {
+    if (i > 1) {
+      result += " ";
+    }
+    if (i % 3 === 0 && i % 5 === 0) {
+      result += "FizzBuzz";
+    } else if (i % 3 === 0) {
+      result += "Fizz";
+    } else if (i % 5 === 0) {
+      result += "Buzz";
+    } else {
+      result += String(i);
+    }
+  }
+  console.log(result);
+};
 
-// chapter 2
-const rl = createInterface({
-  input: process.stdin,
-  output: process.stdout,
-});
-
-rl.question("What is your name?: ", (name: string) => {
-  const displayName = name || "Guest";
-  console.log(`Hello, ${displayName}!`);
-  rl.close();
-});
+fizzBuzz();
