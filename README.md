@@ -1,6 +1,6 @@
 # TypeScript Tutorial
 
-### 開発環構築
+### Development environment construction
 
 ```bash
 $ npm init --yes
@@ -10,21 +10,21 @@ $ npx tsc --init
 $ mkdir src
 $ touch src/index.ts
 
-$ npx tsc // コンパイル
-$ node dist/index.js // 実行
+$ npx tsc // compile build
+$ node dist/index.js // execute
 
 ```
 
 ```lua
 -- tsconfig.json
---  コメントアウトを解除
+-- Uncomment out.
 -- "outDir": "./dist",
 -- "rootDir": "./src",
 
--- "compilerOptions" スコープの外に下記を追加
+-- "compilerOptions"  // Add the following outside the scope:
 -- "include": ["./src/**/*.ts"]
 
--- [] から ["node"] に変更
+-- [] =>  ["node"]
 -- "types": ["node"],
 
 ```
