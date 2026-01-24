@@ -1,18 +1,20 @@
-// objects
-const obj = {
+// typescript code
+type Person = {
+  name: string;
+  age: number;
+  isStudent: boolean;
+};
+
+const obj: Person = {
   name: "Alice",
   age: 30,
   isStudent: false,
 };
 
-const execute = () => {
-  console.log("Executing function...");
-  if (obj.isStudent === false) {
-    obj.isStudent = true;
+console.log(`Name: ${obj.name}, Age: ${obj.age}, Is Student: ${obj.isStudent}`);
 
-    console.log(obj);
-  }
-};
-
-console.log(obj);
-execute();
+if (obj.age !== undefined) {
+  obj.age = 31; // Valid assignment
+  console.log(`Updated Age: ${obj.age}`);
+}
+console.log("All operations completed successfully.");
