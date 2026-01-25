@@ -1,20 +1,35 @@
 // typescript code
-type Person = {
-  name: string;
+type Animal = {
   age: number;
-  isStudent: boolean;
 };
 
-const obj: Person = {
-  name: "Alice",
-  age: 30,
-  isStudent: false,
+type Human = {
+  age: number;
+  name: string;
 };
 
-console.log(`Name: ${obj.name}, Age: ${obj.age}, Is Student: ${obj.isStudent}`);
+type AnimalFamily = {
+  familyName: string;
+  mother: Animal;
+  father: Animal;
+  child: Animal;
+};
 
-if (obj.age !== undefined) {
-  obj.age = 31; // Valid assignment
-  console.log(`Updated Age: ${obj.age}`);
-}
-console.log("All operations completed successfully.");
+type HumanFamily = {
+  familyName: string;
+  mother: Human;
+  father: Human;
+  child: Human;
+};
+
+const obj: AnimalFamily | HumanFamily = {
+  familyName: "Smith",
+  mother: { age: 40, name: "Jane" },
+  father: { age: 42, name: "John" },
+  child: { age: 10, name: "Junior" },
+};
+
+console.log(`Family name is ${obj.familyName}`);
+console.log(`Mother's name is ${obj.mother.name}, age is ${obj.mother.age}`);
+console.log(`Father's name is ${obj.father.name}, age is ${obj.father.age}`);
+console.log(`Child's name is ${obj.child.name}, age is ${obj.child.age}`);
