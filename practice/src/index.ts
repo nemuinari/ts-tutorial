@@ -1,35 +1,21 @@
-// typescript code
-type Animal = {
-  age: number;
-};
+// chapter 3.5: arrays
 
-type Human = {
-  age: number;
-  name: string;
-};
+const arr_int: number[] = [1, 2, 3];
+const arr_str: string[] = ["a", "b", "c"];
+const arr_bool: boolean[] = [true, false, true];
 
-type AnimalFamily = {
-  familyName: string;
-  mother: Animal;
-  father: Animal;
-  child: Animal;
-};
+arr_int.push(4);
+arr_str.push("d");
+arr_bool.push(false);
 
-type HumanFamily = {
-  familyName: string;
-  mother: Human;
-  father: Human;
-  child: Human;
-};
+console.log("arr_int is length: ", arr_int.length); // 4
+console.log("arr_str is length: ", arr_str.length); // 4
+console.log("arr_bool is length: ", arr_bool.length); // 4
 
-const obj: AnimalFamily | HumanFamily = {
-  familyName: "Smith",
-  mother: { age: 40, name: "Jane" },
-  father: { age: 42, name: "John" },
-  child: { age: 10, name: "Junior" },
-};
+const arr_read_int: readonly number[] = [5, 6, 7];
 
-console.log(`Family name is ${obj.familyName}`);
-console.log(`Mother's name is ${obj.mother.name}, age is ${obj.mother.age}`);
-console.log(`Father's name is ${obj.father.name}, age is ${obj.father.age}`);
-console.log(`Child's name is ${obj.child.name}, age is ${obj.child.age}`);
+console.log("arr_read_int includes: ", arr_read_int.includes(6)); // true
+
+for (const elm of arr_int) {
+  console.log(elm); // 1 2 3 4
+}
