@@ -1,21 +1,37 @@
-// chapter 3.5: arrays
+// chapter 3-6 Destructuring Assignment
 
-const arr_int: number[] = [1, 2, 3];
-const arr_str: string[] = ["a", "b", "c"];
-const arr_bool: boolean[] = [true, false, true];
+const nested = {
+  num: 123,
+  obj: {
+    foo: "hello",
+    bar: "world",
+  },
+};
 
-arr_int.push(4);
-arr_str.push("d");
-arr_bool.push(false);
+const {
+  num,
+  obj: { foo, bar },
+} = nested;
 
-console.log("arr_int is length: ", arr_int.length); // 4
-console.log("arr_str is length: ", arr_str.length); // 4
-console.log("arr_bool is length: ", arr_bool.length); // 4
+console.log(num); // 123
+console.log(foo + ", " + bar); // hello world
 
-const arr_read_int: readonly number[] = [5, 6, 7];
+const arr = [1, 2, 3, 4, 5];
+const [a, b, c] = arr;
 
-console.log("arr_read_int includes: ", arr_read_int.includes(6)); // true
+console.log(a); // 1
+console.log(b); // 2
+console.log(c); // 3
 
-for (const elm of arr_int) {
-  console.log(elm); // 1 2 3 4
-}
+const tuple: [string, number] = ["Kyoko", 25];
+const [myName, age] = tuple;
+
+console.log(myName);
+console.log(age);
+
+const arr2 = [10, 20, 30, 40, 50];
+const [first, , third, ...rest] = arr2;
+
+console.log(first); // 10
+console.log(third); // 30
+console.log(rest); // [40, 50]
