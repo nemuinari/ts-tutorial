@@ -1,37 +1,40 @@
-// chapter 3-6 Destructuring Assignment
+// chapter 3-8
 
-const nested = {
-  num: 123,
-  obj: {
-    foo: "hello",
-    bar: "world",
-  },
+type User = {
+  name: string;
+  age: number;
+  premiumUser: boolean;
 };
 
-const {
-  num,
-  obj: { foo, bar },
-} = nested;
+// This is data in CSV
+const data: string = `
+uhyo,25,1
+mike,30,0
+alice,28,1
+`;
 
-console.log(num); // 123
-console.log(foo + ", " + bar); // hello world
+// Object array is type User[]
+const users: User[] = [];
 
-const arr = [1, 2, 3, 4, 5];
-const [a, b, c] = arr;
+// reading CSV data
+const lines = data.split("\n");
+for (const line of lines) {
+  if (line === "") {
+    continue;
+  }
 
-console.log(a); // 1
-console.log(b); // 2
-console.log(c); // 3
+  const [name, ageStr, premiumUserStr] = line.split(",");
+  users.push({
+    name: name ?? "",
+    age: Number(ageStr),
+    premiumUser: premiumUserStr === "1",
+  });
+}
 
-const tuple: [string, number] = ["Kyoko", 25];
-const [myName, age] = tuple;
-
-console.log(myName);
-console.log(age);
-
-const arr2 = [10, 20, 30, 40, 50];
-const [first, , third, ...rest] = arr2;
-
-console.log(first); // 10
-console.log(third); // 30
-console.log(rest); // [40, 50]
+for (const user of users) {
+  if (user.premiumUser) {
+    console.log(`${user.name} (${user.age}) is a premium user.`);
+  } else {
+    console.log(`${user.name} (${user.age}) isn't a premium user.`);
+  }
+}
