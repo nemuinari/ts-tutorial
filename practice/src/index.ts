@@ -1,40 +1,64 @@
-// chapter 3-8
+// chapter 4-1
 
+/* Arrow Function and Map */
 type User = {
   name: string;
   age: number;
-  premiumUser: boolean;
 };
 
-// This is data in CSV
-const data: string = `
-uhyo,25,1
-mike,30,0
-alice,28,1
-`;
+const users: User[] = [
+  { name: "Alice", age: 25 },
+  { name: "Bob", age: 30 },
+  { name: "Charlie", age: 35 },
+];
 
-// Object array is type User[]
-const users: User[] = [];
+const names = users.map((user: User): string => user.name);
+console.log(names); // ["Alice", "Bob", "Charlie"]
 
-// reading CSV data
-const lines = data.split("\n");
-for (const line of lines) {
-  if (line === "") {
-    continue;
+/* Arrow Function
+type human = {
+  height: number;
+  weight: number;
+};
+
+const calcBMI = (human: human): number => {
+  return human.weight / (human.height / 100) ** 2;
+};
+
+const uhyo: human = {
+  height: 181,
+  weight: 72,
+};
+
+console.log(calcBMI(uhyo)); // 21.97802197802198
++/
+
+/*
+type Human = {
+  height: number;
+  weight: number;
+};
+
+const calcBMI = function (human: Human): number {
+  return human.weight / (human.height / 100) ** 2;
+};
+
+const uhyo: Human = {
+  height: 181,
+  weight: 72,
+};
+
+console.log(calcBMI(uhyo)); // 21.97802197802198
+*/
+
+/*
+function range(min: number, max: number): number[] {
+  const result = [];
+  for (let i = min; i <= max; i++) {
+    result.push(i);
   }
-
-  const [name, ageStr, premiumUserStr] = line.split(",");
-  users.push({
-    name: name ?? "",
-    age: Number(ageStr),
-    premiumUser: premiumUserStr === "1",
-  });
+  return result;
 }
 
-for (const user of users) {
-  if (user.premiumUser) {
-    console.log(`${user.name} (${user.age}) is a premium user.`);
-  } else {
-    console.log(`${user.name} (${user.age}) isn't a premium user.`);
-  }
-}
+console.log(range(1, 10)); // [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+*/
