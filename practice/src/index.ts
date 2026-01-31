@@ -1,9 +1,15 @@
 // chapter 4-2
 
-/* generic function */
+/* generic function 
 function firstElement<T>(array: T[]): T | undefined {
   return array[0];
 }
+*/
+
+/* arrow function */
+const firstElement = <T>(array: T[]): T | undefined => {
+  return array[0];
+};
 
 type User = {
   name: string;
