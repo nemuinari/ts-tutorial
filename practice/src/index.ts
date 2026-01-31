@@ -1,6 +1,10 @@
-// chapter 4-1
+// chapter 4-2
 
-/* Arrow Function and Map */
+/* generic function */
+function firstElement<T>(array: T[]): T | undefined {
+  return array[0];
+}
+
 type User = {
   name: string;
   age: number;
@@ -12,53 +16,10 @@ const users: User[] = [
   { name: "Charlie", age: 35 },
 ];
 
-const names = users.map((user: User): string => user.name);
-console.log(names); // ["Alice", "Bob", "Charlie"]
+const firstUser = firstElement(users);
 
-/* Arrow Function
-type human = {
-  height: number;
-  weight: number;
-};
-
-const calcBMI = (human: human): number => {
-  return human.weight / (human.height / 100) ** 2;
-};
-
-const uhyo: human = {
-  height: 181,
-  weight: 72,
-};
-
-console.log(calcBMI(uhyo)); // 21.97802197802198
-+/
-
-/*
-type Human = {
-  height: number;
-  weight: number;
-};
-
-const calcBMI = function (human: Human): number {
-  return human.weight / (human.height / 100) ** 2;
-};
-
-const uhyo: Human = {
-  height: 181,
-  weight: 72,
-};
-
-console.log(calcBMI(uhyo)); // 21.97802197802198
-*/
-
-/*
-function range(min: number, max: number): number[] {
-  const result = [];
-  for (let i = min; i <= max; i++) {
-    result.push(i);
-  }
-  return result;
+if (firstUser) {
+  console.log(`Name: ${firstUser.name}, Age: ${firstUser.age}`);
+} else {
+  console.log("No users found.");
 }
-
-console.log(range(1, 10)); // [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-*/
