@@ -1,31 +1,27 @@
-// chapter 4-2
+// chapter 4-3
 
-/* generic function 
-function firstElement<T>(array: T[]): T | undefined {
-  return array[0];
-}
-*/
-
-/* arrow function */
-const firstElement = <T>(array: T[]): T | undefined => {
-  return array[0];
+type HasName = {
+  name: string;
 };
 
-type User = {
+type HasNameAndAge = {
   name: string;
   age: number;
 };
 
-const users: User[] = [
-  { name: "Alice", age: 25 },
-  { name: "Bob", age: 30 },
-  { name: "Charlie", age: 35 },
-];
+const showStatus = (obj: HasName): void => {
+  console.log(`Name: ${obj.name}`);
 
-const firstUser = firstElement(users);
+  if ("age" in obj) {
+    console.log(`Age: ${obj.age}`);
+  }
+};
 
-if (firstUser) {
-  console.log(`Name: ${firstUser.name}, Age: ${firstUser.age}`);
-} else {
-  console.log("No users found.");
-}
+const g = (obj: HasNameAndAge): void => {
+  showStatus(obj);
+};
+
+g({
+  name: "Alice",
+  age: 30,
+});
