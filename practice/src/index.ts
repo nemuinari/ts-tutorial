@@ -1,27 +1,81 @@
-// chapter 4-3
+// chapter 4-4
 
-type HasName = {
-  name: string;
+// callback function
+/*
+type Mapper = <T, U>(array: T[], callback: (element: T) => U) => U[];
+
+const map: Mapper = (array, callback) => {
+  const result = [];
+  for (const element of array) {
+    result.push(callback(element));
+  }
+  return result;
 };
+*/
+function map<T, U>(array: T[], callback: (element: T) => U): U[] {
+  const result: U[] = [];
+  for (const element of array) {
+    result.push(callback(element));
+  }
+  return result;
+}
 
-type HasNameAndAge = {
-  name: string;
-  age: number;
-};
+const data = [1, -2, 3, -4, 5];
+const result: boolean[] = map(data, (x) => x >= 0);
 
-const showStatus = (obj: HasName): void => {
-  console.log(`Name: ${obj.name}`);
+console.log(result);
 
-  if ("age" in obj) {
-    console.log(`Age: ${obj.age}`);
+// FizzBuzz
+/*
+type FizzBuzz = "Fizz" | "Buzz" | "FizzBuzz" | number;
+
+const getFizzBuzz = (element: number): FizzBuzz => {
+  if (element % 3 === 0 && element % 5 === 0) {
+    return "FizzBuzz";
+  } else if (element % 3 === 0) {
+    return "Fizz";
+  } else if (element % 5 === 0) {
+    return "Buzz";
+  } else {
+    return element;
   }
 };
 
-const g = (obj: HasNameAndAge): void => {
-  showStatus(obj);
+const sequence = (start: number, end: number): number[] => {
+  const result: number[] = [];
+  for (let i = start; i <= end; i++) {
+    result.push(i);
+  }
+  return result;
 };
 
-g({
-  name: "Alice",
-  age: 30,
-});
+for (const i of sequence(1, 100)) {
+  const message = getFizzBuzz(i);
+  console.log(message);
+}
+*/
+
+// generic arrow function
+/*
+const repeat = <T>(element: T, lenght: number): T[] => {
+  const result: T[] = [];
+  for (let i = 0; i < lenght; i++) {
+    result.push(element);
+  }
+  return result;
+};
+
+const result = repeat("Hello", 3);
+console.log(result);
+*/
+
+// generic function
+/*
+const repeat = function <T>(element: T, lenght: number): T[] {
+  const result: T[] = [];
+  for (let i = 0; i < lenght; i++) {
+    result.push(element);
+  }
+  return result;
+};
+*/
