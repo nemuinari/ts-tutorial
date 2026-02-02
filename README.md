@@ -13,6 +13,8 @@ $ touch src/index.ts
 $ npx tsc // compile build
 $ node dist/index.js // execute
 
+$ npx tsx src/index.js // not compiles tsx execute
+
 ```
 
 ```lua
