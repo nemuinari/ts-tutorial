@@ -1,27 +1,36 @@
-// chapter 5-1 class declaration
-class User<T> {
+// chapter 5-2 class declaration
+class User {
   name: string;
-  age: number;
-  data: T;
+  #age: number; // private field
 
-  constructor(name: string, age: number, data: T) {
+  constructor(name: string, age: number) {
     this.name = name;
-    this.age = age;
-    this.data = data;
+    this.#age = age;
   }
 
   public isAdult(): boolean {
-    return this.age >= 18;
+    return this.#age >= 20;
+  }
+
+  protected getAge(): number {
+    return this.#age;
   }
 }
 
-const uhyo: User<string> = new User("uhyo", 26, "add data");
-const data = uhyo.data;
+class Admin extends User {
+  rank: number = 1;
 
-const john = new User("John Smith", 15, { num: 123 });
-const data2 = john.data;
+  public override isAdult(): boolean {
+    return this.getAge() >= 18;
+  }
+}
 
-console.log("data; ", data);
-console.log("data2; ", data2);
-console.log("Is uhyo adult? ", uhyo.isAdult());
-console.log("Is john adult? ", john.isAdult());
+const uhyo: User = new User("uhyo", 18);
+const john: Admin = new Admin("john", 18);
+
+console.log(uhyo.name); // "uhyo"
+console.log(uhyo.isAdult()); // false
+
+console.log(john.name); // "john"
+console.log(john.isAdult()); // true
+console.log(john.rank); // 1
