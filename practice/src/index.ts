@@ -1,4 +1,4 @@
-// chapter 5-2 class declaration
+// chapter 5-3 class declaration
 class User {
   name: string;
   #age: number; // private field
@@ -11,26 +11,13 @@ class User {
   public isAdult(): boolean {
     return this.#age >= 20;
   }
-
-  protected getAge(): number {
-    return this.#age;
-  }
 }
 
-class Admin extends User {
-  rank: number = 1;
+const uhyo: User = new User("uhyo", 20);
+const john: User = new User("john", 10);
 
-  public override isAdult(): boolean {
-    return this.getAge() >= 18;
-  }
-}
+console.log(uhyo.isAdult()); // true
 
-const uhyo: User = new User("uhyo", 18);
-const john: Admin = new Admin("john", 18);
-
-console.log(uhyo.name); // "uhyo"
-console.log(uhyo.isAdult()); // false
-
-console.log(john.name); // "john"
-console.log(john.isAdult()); // true
-console.log(john.rank); // 1
+console.log(uhyo.isAdult.apply(john, [])); // false
+console.log(uhyo.isAdult.call(john)); // false
+console.log(uhyo.isAdult.bind(john)()); // false
