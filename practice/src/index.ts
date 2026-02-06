@@ -1,12 +1,44 @@
-// chapter 5-4 class declaration
-try {
-  console.log("before error");
-  throwError();
-  console.log("after error");
-} finally {
-  console.log("finally");
+// chapter 5-6 class declaration
+class User {
+  name: string;
+  #age: number;
+
+  constructor(name: string, age: number) {
+    if (name === "") {
+      throw new Error("Name cannot be empty");
+    }
+    this.name = name;
+    this.#age = age;
+  }
+
+  getMessage(message: string): string {
+    return `${this.name} (${this.#age}) / says: ${message}`;
+  }
 }
 
-function throwError() {
-  throw new Error("This is an error");
+const uhyo = new User("uhyo", 26);
+console.log(uhyo.getMessage("Hello, world!"));
+
+/* template
+type User = {
+  name: string;
+  age: number;
+};
+
+function createUser(name: string, age: number): User {
+  if (name === "") {
+    throw new Error("Name cannot be empty");
+  }
+  return {
+    name,
+    age,
+  };
 }
+
+function getMessage(user: User, message: string): string {
+  return `${user.name} says: ${message}`;
+}
+
+const uhyo = createUser("uhyo", 26);
+console.log(getMessage(uhyo, "Hello, world!"));
+*/
