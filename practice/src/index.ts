@@ -1,68 +1,33 @@
-// chapter 5-6 class declaration
-type User = {
+// chapter 6-1 type union and intersection
+type Human = {
   name: string;
-  age: number;
+  age: number | undefined;
+};
+type Animal = {
+  species: string;
 };
 
-const createUser = (name: string, age: number): User => {
-  if (name === "") {
-    throw new Error("Name cannot be empty");
-  }
-  return {
-    name,
-    age,
-  };
-};
-
-const getMessage = (user: User, message: string): string => {
-  return `${user.name} (${user.age}) / says: ${message}`;
-};
-
-const uhyo = createUser("uhyo", 26);
-console.log(getMessage(uhyo, "Hello, world!"));
-
-/*
-class User {
-  name: string;
-  #age: number;
-
-  constructor(name: string, age: number) {
-    if (name === "") {
-      throw new Error("Name cannot be empty");
-    }
-    this.name = name;
-    this.#age = age;
-  }
-
-  getMessage(message: string): string {
-    return `${this.name} (${this.#age}) / says: ${message}`;
-  }
+function getName(human: Human) {
+  return human.name;
+}
+function getAge(human: Human) {
+  return human.age;
+}
+function getSpecies(animal: Animal) {
+  return animal.species;
+}
+function mergeUser(user: Human & Animal): string {
+  return `${user.name} (${user.species}) is ${user.age ?? "unknown"} years old.`;
 }
 
-const uhyo = new User("uhyo", 26);
-console.log(uhyo.getMessage("Hello, world!"));
-*/
+// const mysteryFunc = Math.random() > 0.5 ? getName : getSpecies;
 
-/* template
-type User = {
-  name: string;
-  age: number;
+const uhyo: Human & Animal = {
+  name: "uhyo",
+  age: 29, // undefined,
+  species: "homo sapiens",
 };
 
-function createUser(name: string, age: number): User {
-  if (name === "") {
-    throw new Error("Name cannot be empty");
-  }
-  return {
-    name,
-    age,
-  };
-}
-
-function getMessage(user: User, message: string): string {
-  return `${user.name} says: ${message}`;
-}
-
-const uhyo = createUser("uhyo", 26);
-console.log(getMessage(uhyo, "Hello, world!"));
-*/
+// const value = mysteryFunc(uhyo);
+const value = mergeUser(uhyo);
+console.log(value);
