@@ -1,33 +1,23 @@
-// chapter 6-1 type union and intersection
-type Human = {
-  name: string;
-  age: number | undefined;
-};
-type Animal = {
-  species: string;
-};
+// chapter 6-2 literal types
 
-function getName(human: Human) {
-  return human.name;
-}
-function getAge(human: Human) {
-  return human.age;
-}
-function getSpecies(animal: Animal) {
-  return animal.species;
-}
-function mergeUser(user: Human & Animal): string {
-  return `${user.name} (${user.species}) is ${user.age ?? "unknown"} years old.`;
+function getHelloStr(): "Hello, ${string}!" {
+  const rand = Math.random();
+  if (rand < 0.3) {
+    return "Hello, World!";
+  } else if (rand < 0.6) {
+    return "Hello, TypeScript!";
+  } else {
+    return "Hello, Developer!";
+  }
 }
 
-// const mysteryFunc = Math.random() > 0.5 ? getName : getSpecies;
+const helloStr = getHelloStr();
+console.log(helloStr); // Possible outputs: "Hello, World!", "Hello, TypeScript!", "Hello, Developer!"
 
-const uhyo: Human & Animal = {
-  name: "uhyo",
-  age: 29, // undefined,
-  species: "homo sapiens",
-};
+// literal type union
+function signNumber(type: "plus" | "minus") {
+  return type === "plus" ? 1 : -1;
+}
 
-// const value = mysteryFunc(uhyo);
-const value = mergeUser(uhyo);
-console.log(value);
+console.log(signNumber("plus")); // Output: 1
+console.log(signNumber("minus")); // Output: -1
