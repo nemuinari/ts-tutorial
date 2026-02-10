@@ -1,77 +1,44 @@
-// chapter 6-3 control flow analysis
-type Animal = {
-  tag: "animal";
-  species: string;
-};
-
+// chapter 6-4 keyof and lookup types
 type Human = {
-  tag: "human";
+  type: "human";
   name: string;
+  age: number;
 };
 
-type Robot = {
-  tag: "robot";
-  name: number;
+function setAge(human: Human, age: Human["age"]) {
+  return {
+    ...human,
+    age,
+  };
+}
+
+const uhyo: Human = {
+  type: "human",
+  name: "uhyo",
+  age: 26,
 };
 
-type User = Animal | Human | Robot;
+const uhyo2 = setAge(uhyo, 30);
+console.log(uhyo2);
 
-function getUserTag(user: User): string {
-  if (user.tag === "animal") {
-    return `This is an animal of species: ${user.species}`;
-  } else if (user.tag === "human") {
-    return `This is a human named: ${user.name}`;
-  } else {
-    return `This is a robot with ID: ${user.name}`;
-  }
+function get<T, K extends keyof T>(obj: T, key: K): T[K] {
+  return obj[key];
 }
 
-function getUserTag2(user: User): string {
-  switch (user.tag) {
-    case "animal":
-      return `This is an animal of species: ${user.species}`;
-    case "human":
-      return `This is a human named: ${user.name}`;
-    case "robot":
-      return `This is a robot with ID: ${user.name}`;
-  }
+function setAge2<T extends { age: number }>(obj: T, age: T["age"]): T {
+  return {
+    ...obj,
+    age,
+  };
 }
 
-console.log(getUserTag({ tag: "animal", species: "Cat" }));
-console.log(getUserTag({ tag: "human", name: "Alice" }));
-console.log(getUserTag({ tag: "robot", name: 101 }));
+const uhyoNmme = get(uhyo, "name");
+const uhyoAge = get(uhyo, "age");
 
-console.log(getUserTag2({ tag: "animal", species: "Dog" }));
-console.log(getUserTag2({ tag: "human", name: "Bob" }));
-console.log(getUserTag2({ tag: "robot", name: 202 }));
-/*
-function formatNumberOrString(value: number | string) {
-  if (typeof value === "number") {
-    return value.toFixed(2);
-  } else {
-    return value;
-  }
-}
+console.log(uhyoNmme);
+console.log(uhyoAge);
 
-console.log(formatNumberOrString(3.14159)); // "3.14"
-console.log(formatNumberOrString("Hello")); // "Hello"
-*/
+const uhyo3 = setAge2(uhyo, 35);
+const uhyoAge2 = get(uhyo3, "age");
 
-/* 
-type SignType = "plus" | "minus";
-function signNumber(type: SignType) {
-  return type === "plus" ? 1 : -1;
-}
-
-function numberWithSign(num: number, type: SignType | "none") {
-  if (type === "none") {
-    return num;
-  } else {
-    return num * signNumber(type);
-  }
-}
-
-console.log(numberWithSign(5, "plus")); // 5
-console.log(numberWithSign(5, "minus")); // -5
-console.log(numberWithSign(5, "none")); // 5
-*/
+console.log(uhyoAge2);
