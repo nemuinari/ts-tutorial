@@ -1,44 +1,34 @@
-// chapter 6-4 keyof and lookup types
-type Human = {
-  type: "human";
-  name: string;
-  age: number;
+// chapter 6ex
+// tag set unions Option and Either
+
+type Some<T> = {
+  tag: "some";
+  value: T;
+};
+type None = {
+  tag: "none";
+};
+type Option<T> = Some<T> | None;
+
+function printOption(obj: Option<number>): void {
+  if (isSome(obj)) {
+    console.log(`Value: ${obj.value}`);
+  } else {
+    console.log("No value");
+  }
+}
+
+function isSome<T>(obj: Option<T>): obj is Some<T> {
+  return obj.tag === "some";
+}
+
+const four: Option<number> = {
+  tag: "some",
+  value: 100,
+};
+const nothing: Option<number> = {
+  tag: "none",
 };
 
-function setAge(human: Human, age: Human["age"]) {
-  return {
-    ...human,
-    age,
-  };
-}
-
-const uhyo: Human = {
-  type: "human",
-  name: "uhyo",
-  age: 26,
-};
-
-const uhyo2 = setAge(uhyo, 30);
-console.log(uhyo2);
-
-function get<T, K extends keyof T>(obj: T, key: K): T[K] {
-  return obj[key];
-}
-
-function setAge2<T extends { age: number }>(obj: T, age: T["age"]): T {
-  return {
-    ...obj,
-    age,
-  };
-}
-
-const uhyoNmme = get(uhyo, "name");
-const uhyoAge = get(uhyo, "age");
-
-console.log(uhyoNmme);
-console.log(uhyoAge);
-
-const uhyo3 = setAge2(uhyo, 35);
-const uhyoAge2 = get(uhyo3, "age");
-
-console.log(uhyoAge2);
+printOption(four); // Output: Value: 100
+printOption(nothing); // Output: No value
