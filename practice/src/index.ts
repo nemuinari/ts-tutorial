@@ -1,34 +1,17 @@
-// chapter 6ex
-// tag set unions Option and Either
+// chapter 07: export and import
+import { uhyoName, uhyoAge } from "./uhyo.js";
+import { getName } from "./uhyo.js";
+import { type Animal, tama } from "./animal.js";
+import { type Human } from "./human.js";
 
-type Some<T> = {
-  tag: "some";
-  value: T;
+console.log(`My name is ${uhyoName} and ${uhyoAge} years old.`);
+console.log(`My name is ${getName()}.`);
+
+const myCat: Animal = { ...tama };
+console.log(`I have a ${myCat.species} is ${myCat.age} years old.`);
+
+export const uhyo: Human = {
+  name: "uhyo",
+  age: 26,
 };
-type None = {
-  tag: "none";
-};
-type Option<T> = Some<T> | None;
-
-function printOption(obj: Option<number>): void {
-  if (isSome(obj)) {
-    console.log(`Value: ${obj.value}`);
-  } else {
-    console.log("No value");
-  }
-}
-
-function isSome<T>(obj: Option<T>): obj is Some<T> {
-  return obj.tag === "some";
-}
-
-const four: Option<number> = {
-  tag: "some",
-  value: 100,
-};
-const nothing: Option<number> = {
-  tag: "none",
-};
-
-printOption(four); // Output: Value: 100
-printOption(nothing); // Output: No value
+console.log(`Exported human: ${uhyo.name}, age ${uhyo.age}`);
